@@ -118,6 +118,33 @@
   cursor: not-allowed;
 }
 
+.run-log-panel {
+  background: #1B1F23;
+  color: #D8DEE4;
+  font-family: 'Consolas', 'D2Coding', 'Malgun Gothic', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 10px 24px;
+  max-height: 160px;
+  overflow-y: auto;
+  border-bottom: 1px solid var(--clr-border);
+  position: sticky;
+  top: 48px;
+  z-index: 99;
+}
+
+.run-log-panel .run-log-header {
+  color: var(--clr-accent);
+  font-family: inherit;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.run-log-panel .run-log-line {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
 /* ── 기본 리셋 ───────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 
