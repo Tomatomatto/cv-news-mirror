@@ -118,6 +118,106 @@
   cursor: not-allowed;
 }
 
+/* 버튼 안 로딩 스피너 (Confluence 발행 등 짧은 동기 액션 버튼 공용, 2026-08-24) */
+.btn-run-now .btn-spinner {
+  display: none;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  vertical-align: -1px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: btn-spin 0.7s linear infinite;
+}
+
+.btn-run-now.is-loading .btn-spinner {
+  display: inline-block;
+}
+
+/* 버튼 자체가 결과를 잠깐 색으로 보여준 뒤(2.5초) 원래 상태로 돌아간다 --
+   "눌렸는지/결과가 뭔지"를 토스트보다 먼저 눈에 들어오게 하기 위함. */
+.btn-run-now.is-success {
+  background: var(--clr-success);
+  border-color: var(--clr-success);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-run-now.is-error {
+  background: var(--clr-danger);
+  border-color: var(--clr-danger);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── 토스트 알림 (2026-08-24, 버튼 액션 결과를 눈에 띄게 표시) ────────────── */
+.toast-container {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  min-width: 260px;
+  max-width: 360px;
+  background: var(--clr-bg-page);
+  border-left: 4px solid var(--clr-text-faint);
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--clr-text-hi);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  animation: toast-in 0.2s ease-out;
+}
+
+.toast.toast-hide {
+  animation: toast-out 0.2s ease-in forwards;
+}
+
+.toast-success { border-left-color: var(--clr-success); }
+.toast-error { border-left-color: var(--clr-danger); }
+
+.toast-icon { font-weight: 700; flex-shrink: 0; }
+.toast-success .toast-icon { color: var(--clr-success); }
+.toast-error .toast-icon { color: var(--clr-danger); }
+
+.toast-body { flex: 1; word-break: break-word; }
+.toast-body a { color: var(--clr-indigo); font-weight: 600; text-decoration: underline; }
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--clr-text-faint);
+  font-size: 15px;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes toast-out {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(16px); }
+}
+
 .run-log-panel {
   background: #1B1F23;
   color: #D8DEE4;
