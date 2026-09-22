@@ -566,6 +566,45 @@ body {
   letter-spacing: 0.02em;
 }
 
+/* ── 클러스터(동일 사건) 배지 ─────────────────────────────────────────────
+   같은 cluster_id를 공유하는 기사가 화면(같은 날짜/지역 목록)에 2건 이상
+   있을 때만 표시. Excel 월간 리포트의 클러스터 레이블 칩과 같은 역할이지만,
+   웹은 기존 지역/날짜 정렬을 그대로 유지한 채 배지 + 하이라이트만 추가하는
+   방식을 택했다(2026-09-21) -- 목록 순서 자체를 바꾸는 것보다 변경 범위가
+   작고, 사용자가 기대하는 기존 정렬(최신순 등)을 깨지 않는다. */
+.cluster-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--clr-accent-strong);
+  background: var(--clr-accent-bg);
+  border: 1px solid rgba(0, 170, 210, 0.25);
+  white-space: nowrap;
+  cursor: pointer;
+  margin-bottom: 4px;
+}
+
+.cluster-badge:hover {
+  background: rgba(0, 170, 210, 0.16);
+}
+
+.cluster-badge-count {
+  font-weight: 700;
+}
+
+/* 같은 클러스터 배지를 클릭했을 때 나머지 멤버 행에 부여되는 하이라이트.
+   JS(app.js)가 토글 -- 배지를 다시 클릭하면 해제. news-table의 배경은 tr이
+   아니라 td에 그려지므로(교호 행 음영 등) td 쪽에 직접 적용해야 실제로 보인다. */
+tr.cluster-highlight td {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: -2px;
+  background: var(--clr-accent-bg) !important;
+}
+
 /* ── 행 번호 ─────────────────────────────────────────────────────────────── */
 .row-num {
   font-size: 12px;
