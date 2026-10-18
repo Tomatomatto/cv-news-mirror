@@ -228,9 +228,6 @@
   max-height: 160px;
   overflow-y: auto;
   border-bottom: 1px solid var(--clr-border);
-  position: sticky;
-  top: 48px;
-  z-index: 99;
 }
 
 .run-log-panel .run-log-header {
@@ -786,3 +783,108 @@ tr.cluster-highlight td {
 .btn-save-article:hover { border-color: var(--clr-accent); color: var(--clr-accent); }
 .btn-save-article:disabled { opacity: 0.5; cursor: not-allowed; }
 .saved-label { font-size: 11px; color: var(--clr-success); white-space: nowrap; }
+
+/* ── 공용 내비게이션 카드 (_nav.html) ─────────────────────────────────────── */
+.nav-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--clr-accent-bg);
+  border: 1px solid rgba(0, 170, 210, 0.35);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  color: var(--clr-accent-strong);
+  font-weight: 600;
+  font-size: 12px;
+  text-decoration: none;
+}
+.nav-card:hover { border-color: var(--clr-accent-strong); }
+.nav-card.active {
+  background: var(--clr-navy);
+  border-color: var(--clr-navy);
+  color: var(--clr-bg-page);
+}
+
+/* ── 시스템 상태 표시줄 ──────────────────────────────────────────────────── */
+/* 상태 표시줄 + 수집 로그 패널을 하나로 묶어 상단 내비 바로 아래에 고정한다.
+   둘이 각자 top:48px로 sticky면 서로 겹친다. */
+.sticky-stack {
+  position: sticky;
+  top: 48px;
+  z-index: 99;
+}
+.status-bar {
+  position: relative;
+  background: var(--clr-bg-subtle);
+  border-bottom: 1px solid var(--clr-border);
+  font-size: 12px;
+}
+.status-bar-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 6px 24px;
+  font: inherit;
+  color: var(--clr-text-md);
+  cursor: pointer;
+  text-align: left;
+}
+.status-bar-toggle:hover { background: var(--clr-border-light); }
+.status-bar-summary { flex: 1; }
+.status-bar-chevron { color: var(--clr-text-faint); }
+.status-dot {
+  width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+  background: var(--clr-success);
+}
+.status-bar[data-level="info"] .status-dot { background: var(--clr-accent); }
+.status-bar[data-level="warn"] .status-dot { background: #E0B400; }
+.status-bar[data-level="danger"] .status-dot { background: var(--clr-danger); }
+/* 반투명 토큰을 그대로 쓰면 스크롤한 내용이 비쳐 보인다 -- 불투명 바탕 위에 겹친다. */
+.status-bar[data-level="danger"] {
+  background: linear-gradient(var(--clr-danger-bg), var(--clr-danger-bg)), var(--clr-bg-page);
+}
+.status-bar[data-level="danger"] .status-bar-summary { color: var(--clr-danger); font-weight: 700; }
+.status-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+  background: var(--clr-bg-page);
+  border-bottom: 1px solid var(--clr-border);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+  padding: 10px 24px 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 6px 24px;
+}
+.status-item { display: flex; gap: 8px; align-items: flex-start; padding: 4px 0; }
+.status-item .status-dot { margin-top: 4px; }
+.status-item[data-level="info"] .status-dot { background: var(--clr-accent); }
+.status-item[data-level="warn"] .status-dot { background: #E0B400; }
+.status-item[data-level="danger"] .status-dot { background: var(--clr-danger); }
+.status-item-label { font-weight: 700; color: var(--clr-text-hi); }
+.status-item-detail { color: var(--clr-text-lo); margin-top: 1px; line-height: 1.5; }
+.status-checked { grid-column: 1 / -1; color: var(--clr-text-faint); font-size: 11px; }
+
+/* ── 지역 탭의 건수 배지 (일별 화면) ───────────────────────────────────────── */
+.tab-count {
+  display: inline-block;
+  min-width: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--clr-border-light);
+  color: var(--clr-text-md);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+.region-tab.active .tab-count { background: var(--clr-navy); color: var(--clr-bg-page); }
+.region-tab.is-empty { opacity: 0.55; }
+.region-tab.is-empty.active { opacity: 1; }
