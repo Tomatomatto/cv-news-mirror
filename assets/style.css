@@ -888,3 +888,53 @@ tr.cluster-highlight td {
 .region-tab.active .tab-count { background: var(--clr-navy); color: var(--clr-bg-page); }
 .region-tab.is-empty { opacity: 0.55; }
 .region-tab.is-empty.active { opacity: 1; }
+
+/* ── API 키 만료 경고 모달 (2026-11-18) ─────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.modal-box {
+  background: var(--clr-bg-page);
+  color: var(--clr-text-hi);
+  border-top: 4px solid var(--clr-danger);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 520px;
+  width: 100%;
+  padding: 20px 22px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.modal-title { margin: 0 0 10px; font-size: 17px; color: var(--clr-danger); }
+.modal-body { margin: 0 0 10px; }
+.modal-steps { margin: 0 0 12px; padding-left: 20px; }
+.modal-detail {
+  margin: 0 0 14px;
+  padding: 8px 10px;
+  background: var(--clr-danger-bg);
+  border: 1px solid var(--clr-danger-border);
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 120px;
+  overflow: auto;
+}
+.modal-ok {
+  display: block;
+  margin-left: auto;
+  padding: 7px 22px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--clr-danger);
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
